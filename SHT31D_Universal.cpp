@@ -62,7 +62,7 @@ void SHT31_Unified::Temperature::getSensor(sensor_t* sensor) {
   // Clear sensor definition.
   memset(sensor, 0, sizeof(sensor_t));
   // Set sensor name.
-  strncpy(sensor->name, "SHT31", sizeof(sensor->name) - 1);
+  strncpy(sensor->name, "SHT31 Temp", sizeof(sensor->name) - 1);
   sensor->name[sizeof(sensor->name)- 1] = 0;
   // Set version and ID
   sensor->version         = DHT_SENSOR_VERSION;
@@ -100,7 +100,7 @@ void SHT31_Unified::Humidity::getSensor(sensor_t* sensor) {
   // Clear sensor definition.
   memset(sensor, 0, sizeof(sensor_t));
   // Set sensor name.
-  strncpy(sensor->name, "SHT31", sizeof(sensor->name) - 1);
+  strncpy(sensor->name, "SHT31 RHum", sizeof(sensor->name) - 1);
   sensor->name[sizeof(sensor->name)- 1] = 0;
   // Set version and ID
   sensor->version         = DHT_SENSOR_VERSION;
