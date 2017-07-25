@@ -19,7 +19,7 @@
 class SHT31_Unified {
 public:
   SHT31_Unified(int32_t tempSensorId=-1, int32_t humiditySensorId=-1);
-  void begin();
+  boolean begin(uint8_t i2caddr = SHT31_DEFAULT_ADDR);
   void heater(boolean);
   uint16_t readStatus(void);
 

@@ -25,8 +25,8 @@ SHT31_Unified::SHT31_Unified(int32_t tempSensorId, int32_t humiditySensorId):
 // PASS-THROUGH METHODS
 // -----------------------------------------------------------------------------
 
-void SHT31_Unified::begin() {
-  _sht31.begin();
+void SHT31_Unified::begin(uint8_t i2caddr) {
+  _sht31.begin(i2caddr);
 }
 
 void SHT31_Unified::heater(boolean status) {
