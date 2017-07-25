@@ -16,6 +16,8 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_SHT31.h>
 
+#define SHT31_UNIFIED_SENSOR_VERSION 1
+
 class SHT31_Unified {
 public:
   SHT31_Unified(int32_t tempSensorId=-1, int32_t humiditySensorId=-1);

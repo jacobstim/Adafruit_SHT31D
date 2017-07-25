@@ -25,8 +25,8 @@ SHT31_Unified::SHT31_Unified(int32_t tempSensorId, int32_t humiditySensorId):
 // PASS-THROUGH METHODS
 // -----------------------------------------------------------------------------
 
-void SHT31_Unified::begin(uint8_t i2caddr) {
-  _sht31.begin(i2caddr);
+boolean SHT31_Unified::begin(uint8_t i2caddr) {
+  return _sht31.begin(i2caddr);
 }
 
 void SHT31_Unified::heater(boolean status) {
@@ -65,7 +65,7 @@ void SHT31_Unified::Temperature::getSensor(sensor_t* sensor) {
   strncpy(sensor->name, "SHT31 Temp", sizeof(sensor->name) - 1);
   sensor->name[sizeof(sensor->name)- 1] = 0;
   // Set version and ID
-  sensor->version         = DHT_SENSOR_VERSION;
+  sensor->version         = SHT31_UNIFIED_SENSOR_VERSION;
   sensor->sensor_id       = _id;
   // Set type and characteristics.
   sensor->type            = SENSOR_TYPE_AMBIENT_TEMPERATURE;
@@ -103,7 +103,7 @@ void SHT31_Unified::Humidity::getSensor(sensor_t* sensor) {
   strncpy(sensor->name, "SHT31 RHum", sizeof(sensor->name) - 1);
   sensor->name[sizeof(sensor->name)- 1] = 0;
   // Set version and ID
-  sensor->version         = DHT_SENSOR_VERSION;
+  sensor->version         = SHT31_UNIFIED_SENSOR_VERSION;
   sensor->sensor_id       = _id;
   // Set type and characteristics.
   sensor->type            = SENSOR_TYPE_RELATIVE_HUMIDITY;
