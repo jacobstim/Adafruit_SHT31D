@@ -1,4 +1,4 @@
-// Sensirion SHT32-D Temperature & Humidity Unified Sensor Library
+// Sensirion SHT31-D Temperature & Humidity Unified Sensor Library
 // Unified Sensor wrapper written by Tim Jacobs in 2017
 // Original code by Adafruit -- https://github.com/adafruit/Adafruit_SHT31
 
@@ -37,6 +37,50 @@ uint16_t SHT31_Unified::readStatus(void) {
   return _sht31.readStatus();
 }
 
+void SHT31_Unified::clearStatus() {
+  _sht31.clearStatus();
+}
+
+boolean SHT31_Unified::isHeaterOn() {
+  return _sht31.isHeaterOn();
+}
+
+boolean SHT31_Unified::isAlertReset() {
+  return _sht31.isAlertReset();
+}
+
+boolean SHT31_Unified::isAlertHumidity() {
+  return _sht31.isAlertHumidity();
+}
+
+boolean SHT31_Unified::isAlertTemperature() {
+  return _sht31.isAlertTemperature();
+}
+
+boolean SHT31_Unified::isAlertPending() {
+  return _sht31.isAlertPending();
+}
+
+void SHT31_Unified::enablePeriodic(Adafruit_SHT31D_Repeatability rep, Adafruit_SHT31D_PeriodicFrequency freq) {
+  _sht31.enablePeriodic(rep, freq);
+}
+void SHT31_Unified::stopPeriodic() {
+  _sht31.stopPeriodic();
+}
+
+void SHT31_Unified::setAlertLimitsLow(Adafruit_SHT31D_AlertValues values) {
+  _sht31.setAlertLimitsLow(values);
+}
+void SHT31_Unified::setAlertLimitsHigh(Adafruit_SHT31D_AlertValues values){
+  _sht31.setAlertLimitsHigh(values);
+}
+Adafruit_SHT31D_AlertValues SHT31_Unified::readAlertLimitsLow(){
+  return _sht31.readAlertLimitsLow();
+}
+Adafruit_SHT31D_AlertValues SHT31_Unified::readAlertLimitsHigh(){
+  return _sht31.readAlertLimitsHigh();
+}
+
 // -----------------------------------------------------------------------------
 // TEMPERATURE SUBCLASS
 // -----------------------------------------------------------------------------
@@ -69,7 +113,7 @@ void SHT31_Unified::Temperature::getSensor(sensor_t* sensor) {
   sensor->sensor_id       = _id;
   // Set type and characteristics.
   sensor->type            = SENSOR_TYPE_AMBIENT_TEMPERATURE;
-  sensor->min_delay       = 1000000L;  // 1 second (in microseconds) -- not sure about this, just set it to 1s
+  sensor->min_delay       = 100000L;  // 0.1 second (in microseconds), at most 10Hz capture mode in periodic mode
   sensor->max_value       = 125.0F;
   sensor->min_value       = -40.0F;
   sensor->resolution      = 0.015F;
@@ -107,7 +151,7 @@ void SHT31_Unified::Humidity::getSensor(sensor_t* sensor) {
   sensor->sensor_id       = _id;
   // Set type and characteristics.
   sensor->type            = SENSOR_TYPE_RELATIVE_HUMIDITY;
-  sensor->min_delay       = 1000000L;  // 1 second (in microseconds) -- not sure about this, just set it to 1s
+  sensor->min_delay       = 100000L;  // 0.1 second (in microseconds), at most 10Hz capture mode in periodic mode
   sensor->max_value       = 100.0F;
   sensor->min_value       = 0.0F;
   sensor->resolution      = 0.01F;

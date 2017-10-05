@@ -1,4 +1,4 @@
-// Sensirion SHT32-D Temperature & Humidity Unified Sensor Library
+// Sensirion SHT31-D Temperature & Humidity Unified Sensor Library
 // Unified Sensor wrapper written by Tim Jacobs in 2017
 // Original code by Adafruit -- https://github.com/adafruit/Adafruit_SHT31
 
@@ -24,6 +24,24 @@ public:
   boolean begin(uint8_t i2caddr = SHT31_DEFAULT_ADDR);
   void heater(boolean);
   uint16_t readStatus(void);
+  void clearStatus();
+
+  // Status interpretation passthrough
+  boolean isHeaterOn();
+  boolean isAlertReset();
+  boolean isAlertHumidity();
+  boolean isAlertTemperature();
+  boolean isAlertPending();
+
+  // Measurement mode configuration passthrough
+  void enablePeriodic(Adafruit_SHT31D_Repeatability rep, Adafruit_SHT31D_PeriodicFrequency freq);
+  void stopPeriodic();
+
+  // Incident configuration passhtrough
+  void setAlertLimitsLow(Adafruit_SHT31D_AlertValues values);
+  void setAlertLimitsHigh(Adafruit_SHT31D_AlertValues values);
+  Adafruit_SHT31D_AlertValues readAlertLimitsLow();
+  Adafruit_SHT31D_AlertValues readAlertLimitsHigh();
 
   class Temperature : public Adafruit_Sensor {
   public:
